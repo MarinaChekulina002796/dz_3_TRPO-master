@@ -1,0 +1,32 @@
+CREATE TABLE Team (
+id smallint unsigned not null auto_increment,
+name varchar(200) not null, city varchar(200),
+games_count int default 0,
+win_games_count int default 0,
+constraint pk_example primary key (id)
+);
+
+
+CREATE TABLE FootballMatch (
+    id smallint unsigned not null auto_increment,
+    team smallint unsigned,
+    opponent smallint unsigned,
+    team_goals int default 0,
+    opponent_goals int default 0,
+    constraint pk_example primary key (id) ,
+    CONSTRAINT fk_team FOREIGN KEY (team) REFERENCES Team(id),
+    CONSTRAINT fk_opponent FOREIGN KEY (opponent) REFERENCES Team(id)
+);
+
+CREATE TABLE Player (
+    id smallint unsigned not null auto_increment,
+    team smallint unsigned,
+    name varchar(200) not null,
+    surname varchar(200) not null,
+    birthday varchar(200) not null,
+    number_in_team int default 0,
+    role varchar(200) not null,
+    goal_count int default 0,
+    constraint pk_example primary key (id) ,
+    CONSTRAINT fk_team_player FOREIGN KEY (team) REFERENCES Team(id)
+);

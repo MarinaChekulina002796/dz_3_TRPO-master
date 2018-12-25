@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Generate</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-10">
+			<div class="page-header">
+				<h1>
+					АИС о футбольных клубах
+				</h1>
+			</div>
+		</div>
+		<div class="col-md-2">
+			<img alt="Bootstrap Image Preview" src="../static/ball.jpg" width=100 class="rounded-circle">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center">
+				Сгенерировать матч
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<div class="dropdown club">
+				 
+				<button class="btn btn-primary dropdown-toggle club" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+					Клуб
+				</button>
+				<div class="dropdown-menu club" aria-labelledby="dropdownMenuButton">
+					 {% for club in clubs %}<a class="dropdown-item" id="{{ club.team_data._id }}" href="#">{{ club.team_data.name }}</a> {% endfor %}
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+		</div>
+		<div class="col-md-2">
+			<div class="dropdown">
+				 
+				<button class="btn btn-primary dropdown-toggle opponent" type="button" id="dropdownMenuButton" data-toggle="dropdown">
+					Соперник
+				</button>
+				<div class="dropdown-menu opponent" aria-labelledby="dropdownMenuButton">
+					 {% for club in clubs %}<a class="dropdown-item" id="{{ club.team_data._id }}" href="#">{{ club.team_data.name }}</a> {% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="text-center">
+				Выберите клуб и его соперника и нажмите "Сгенерировать"
+			</h5>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			 
+			<button type="button" class="btn btn-block btn-lg btn-outline-primary" onclick="window.location.href='/'">
+				На главную
+			</button>
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			 
+			<button type="button" class="btn active btn-block btn-lg btn-success" onclick="window.location.href='/generated_match?team='+ btn_club.value +'&opponent='+ btn_opponent.value">
+				Сгенерировать
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			 <span class="badge badge-primary">Сурикова Ольга ИУ5-14М</span>
+		</div>
+	</div>
+</div>
+
+    <script>
+    menu_btn = $(".dropdown-menu.club");
+    menu_btn.click(function(event) {
+        btn_club = $('.btn.club')[0];
+        btn_club.innerText=event.target.text;
+        btn_club.value=event.target.id;
+        console.log(btn_club.value)
+    });
+
+
+    menu_btn_opponent = $(".dropdown-menu.opponent");
+    menu_btn_opponent.click(function(event) {
+        btn_opponent = $('.btn.opponent')[0];
+        btn_opponent.innerText=event.target.text;
+        btn_opponent.value=event.target.id;
+        console.log(btn_opponent.value)
+    });
+
+
+    btn_club_cl = $('.btn.club');
+    btn_club_cl.click(function(event) {
+
+    menu_btn_dr = $(".dropdown-menu.club");
+    menu_btn_dr.children().each(function( index, el ) {
+        el.classList.remove("active")
+        });
+    if (event.target.value) {
+        menu_btn_dr.children('#'+ event.target.value).addClass('active')
+    }
+
+    });
+
+
+    btn_club_op = $('.btn.opponent');
+    btn_club_op.click(function(event) {
+
+    menu_btn_dr_op = $(".dropdown-menu.opponent");
+    menu_btn_dr_op.children().each(function( index, el ) {
+        el.classList.remove("active")
+        });
+    if (event.target.value) {
+        menu_btn_dr_op.children('#'+ event.target.value).addClass('active')
+    }
+    });
+
+
+
+    </script>
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/scripts.js"></script>
+  </body>
+</html>
